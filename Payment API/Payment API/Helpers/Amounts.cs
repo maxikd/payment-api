@@ -37,6 +37,8 @@ namespace Payment_API.Helpers
         {
             if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount), amount, "Value must be greater than 0.");
             if (string.IsNullOrEmpty(acquirer)) throw new ArgumentNullException(nameof(acquirer), "Acquirer can't be null.");
+            if (string.IsNullOrEmpty(cardBrand)) throw new ArgumentNullException(nameof(cardBrand), "Card brand can't be null.");
+            if (string.IsNullOrEmpty(transactionType)) throw new ArgumentNullException(nameof(transactionType), "Transaction type can't be null.");
 
             double percentage = MDRData.GetFee(acquirer, cardBrand, transactionType);
 
@@ -51,6 +53,8 @@ namespace Payment_API.Helpers
         public static double ComputeNetAmount(Transaction transaction)
         {
             if (transaction == null) throw new ArgumentNullException(nameof(transaction), "Transaction can't be null.");
+            if (transaction.Amount <= 0) throw new ArgumentOutOfRangeException(nameof(transaction.Amount), transaction.Amount, "Value must be greater than 0.");
+            if (string.IsNullOrEmpty(transaction.Acquirer)) throw new ArgumentNullException(nameof(transaction.Acquirer), "Acquirer can't be null.");
             if (string.IsNullOrEmpty(transaction.CardBrand)) throw new ArgumentNullException(nameof(transaction.CardBrand), "Card brand can't be null.");
             if (string.IsNullOrEmpty(transaction.TransactionType)) throw new ArgumentNullException(nameof(transaction.TransactionType), "Transaction type can't be null.");
 

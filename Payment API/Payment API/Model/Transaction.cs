@@ -19,6 +19,27 @@ namespace Payment_API.Model
         [JsonProperty("Adquirente")]
         [JsonRequired]
         public string Acquirer { get; set; }
+
+        /// <summary>
+        /// Initializes an empty intance.
+        /// </summary>
+        public Transaction() { }
+
+        /// <summary>
+        /// Initializes an instance with the specified <paramref name="amount"/>, <paramref name="acquirer"/>, 
+        /// <paramref name="cardBrand"/> and <paramref name="transactionType"/>.
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="acquirer"></param>
+        /// <param name="cardBrand"></param>
+        /// <param name="transactionType"></param>
+        public Transaction(double amount, string acquirer, string cardBrand, string transactionType)
+        {
+            this.Amount = amount;
+            this.Acquirer = acquirer;
+            this.CardBrand = cardBrand;
+            this.TransactionType = transactionType;
+        }
     }
 
     public class NetAmount

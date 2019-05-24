@@ -67,6 +67,8 @@ namespace Payment_API.Model
         public static double GetFee(string acquirer, string cardBrand, string transactionType)
         {
             if (string.IsNullOrEmpty(acquirer)) throw new ArgumentNullException(nameof(acquirer), "Acquirer can't be null.");
+            if (string.IsNullOrEmpty(cardBrand)) throw new ArgumentNullException(nameof(cardBrand), "Card brand can't be null.");
+            if (string.IsNullOrEmpty(transactionType)) throw new ArgumentNullException(nameof(transactionType), "Transaction type can't be null.");
 
             if (!Fees.Any(e => e.Acquirer.Equals(acquirer, StringComparison.InvariantCultureIgnoreCase))) throw new ArgumentOutOfRangeException(nameof(acquirer), acquirer, "Invalid Acquirer.");
 

@@ -28,15 +28,15 @@ namespace Payment_API.Controllers
             }
             catch (ArgumentNullException e)
             {
-                return StatusCode(500, e.Message);
+                return BadRequest(e.Message);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                return StatusCode(500, e.Message);
+                return BadRequest(e.Message);
             }
             catch (IndexOutOfRangeException e)
             {
-                return StatusCode(500, e.Message);
+                return BadRequest(e.Message);
             }
             catch (Exception)
             {
