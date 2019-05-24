@@ -1,14 +1,14 @@
 ﻿namespace Payment_API.Enums
 {
-    public enum TransactionType
+    public static class TransactionType
     {
-        Credit = 0,
-        Debit = 1
+        public const string Credit = "Credito";
+        public const string Debit = "Debito";
     }
 
-    public enum CardBrand
+    public static class CardBrand
     {
-        Mastercard = 0,
-        Visa = 1
+        public const string Mastercard = "Master";
+        public const string Visa = "Visa";
     }
 }

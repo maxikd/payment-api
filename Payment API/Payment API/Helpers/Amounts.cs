@@ -14,6 +14,9 @@ namespace Payment_API.Helpers
         /// <returns>Net amount.</returns>
         private static double ComputeNetAmount(double amount, double percentage)
         {
+            if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount), amount, "Value must be greater than 0.");
+            if (percentage <= 0) throw new ArgumentOutOfRangeException(nameof(percentage), percentage, "Value must be greater than 0.");
+
             double liquid, fee;
 
             fee = amount * percentage / 100;
@@ -30,10 +33,10 @@ namespace Payment_API.Helpers
         /// <param name="cardBrand">Card brand of the transaction.</param>
         /// <param name="transactionType">Transaction type.</param>
         /// <returns>Net amount.</returns>
-        public static double ComputeNetAmount(double amount, string acquirer, CardBrand cardBrand, TransactionType transactionType)
+        public static double ComputeNetAmount(double amount, string acquirer, string cardBrand, string transactionType)
         {
-            if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount));
-            if (string.IsNullOrEmpty(acquirer)) throw new ArgumentNullException(nameof(acquirer));
+            if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount), amount, "Value must be greater than 0.");
+            if (string.IsNullOrEmpty(acquirer)) throw new ArgumentNullException(nameof(acquirer), "Acquirer can't be null.");
 
             double percentage = MDRData.GetFee(acquirer, cardBrand, transactionType);
 
@@ -47,11 +50,11 @@ namespace Payment_API.Helpers
         /// <returns>Net amount.</returns>
         public static double ComputeNetAmount(Transaction transaction)
         {
-            if (transaction == null) throw new ArgumentNullException(nameof(transaction));
-            if (!transaction.CardBrand.HasValue) throw new ArgumentNullException(nameof(transaction.CardBrand));
-            if (!transaction.TransactionType.HasValue) throw new ArgumentNullException(nameof(transaction.TransactionType));
+            if (transaction == null) throw new ArgumentNullException(nameof(transaction), "Transaction can't be null.");
+            if (string.IsNullOrEmpty(transaction.CardBrand)) throw new ArgumentNullException(nameof(transaction.CardBrand), "Card brand can't be null.");
+            if (string.IsNullOrEmpty(transaction.TransactionType)) throw new ArgumentNullException(nameof(transaction.TransactionType), "Transaction type can't be null.");
 
-            return ComputeNetAmount(transaction.Amount, transaction.Acquirer, transaction.CardBrand.Value, transaction.TransactionType.Value);
+            return ComputeNetAmount(transaction.Amount, transaction.Acquirer, transaction.CardBrand, transaction.TransactionType);
         }
     }
 }

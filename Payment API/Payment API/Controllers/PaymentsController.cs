@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Payment_API.Helpers;
 using Payment_API.Model;
+using System;
+using System.Collections.Generic;
 
 namespace Payment_API.Controllers
 {
@@ -24,8 +21,27 @@ namespace Payment_API.Controllers
         [Route("transaction")]
         public ActionResult<NetAmount> Transaction([FromBody] Transaction transaction)
         {
-            double net = Amounts.ComputeNetAmount(transaction);
-            return new NetAmount(net);
+            try
+            {
+                double net = Amounts.ComputeNetAmount(transaction);
+                return new NetAmount(net);
+            }
+            catch (ArgumentNullException e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An unexpected error occured.");
+            }
         }
     }
 }

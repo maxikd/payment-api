@@ -1,0 +1,17 @@
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\PaymentAPITests.deps.json
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\PaymentAPITests.runtimeconfig.json
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\PaymentAPITests.runtimeconfig.dev.json
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\PaymentAPITests.dll
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\PaymentAPITests.pdb
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\Payment API.dll
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\bin\Debug\netcoreapp2.2\Payment API.pdb
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.csprojAssemblyReference.cache
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.csproj.CoreCompileInputs.cache
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.AssemblyInfoInputs.cache
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.AssemblyInfo.cs
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.csproj.CopyComplete
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.dll
+C:\Users\Maximilian\source\repos\Payment-Api\Payment API\PaymentAPITests\obj\Debug\netcoreapp2.2\PaymentAPITests.pdb

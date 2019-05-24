@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Payment_API.Enums;
 using System;
 using System.Collections.Generic;
@@ -65,24 +64,26 @@ namespace Payment_API.Model
         /// <param name="cardBrand">Card brand.</param>
         /// <param name="transactionType">Transaction type.</param>
         /// <returns>Fee value as decimal (eg. 12.54%).</returns>
-        public static double GetFee(string acquirer, CardBrand cardBrand, TransactionType transactionType)
+        public static double GetFee(string acquirer, string cardBrand, string transactionType)
         {
-            if (string.IsNullOrEmpty(acquirer)) throw new ArgumentNullException(nameof(acquirer));
+            if (string.IsNullOrEmpty(acquirer)) throw new ArgumentNullException(nameof(acquirer), "Acquirer can't be null.");
 
-            if (!Fees.Any(e => e.Acquirer.Equals(acquirer))) throw new ArgumentOutOfRangeException("Invalid Acquirer.");
+            if (!Fees.Any(e => e.Acquirer.Equals(acquirer, StringComparison.InvariantCultureIgnoreCase))) throw new ArgumentOutOfRangeException(nameof(acquirer), acquirer, "Invalid Acquirer.");
 
-            var mdr = Fees.Single(e => e.Acquirer.Equals(acquirer));
-            var fee = mdr.Fees.Single(e => e.CardBrand == cardBrand);
+            var mdr = Fees.SingleOrDefault(e => e.Acquirer.Equals(acquirer, StringComparison.InvariantCultureIgnoreCase));
+            if (mdr == null)
+                throw new ArgumentOutOfRangeException(nameof(acquirer), acquirer, "Invalid Acquirer.");
 
-            switch (transactionType)
-            {
-                case TransactionType.Credit:
-                    return fee.Credit;
-                case TransactionType.Debit:
-                    return fee.Debit;
-                default:
-                    throw new IndexOutOfRangeException("Invalid Transaction Type.");
-            }
+            var fee = mdr.Fees.SingleOrDefault(e => e.CardBrand.Equals(cardBrand, StringComparison.InvariantCultureIgnoreCase));
+            if (fee == null)
+                throw new ArgumentOutOfRangeException(nameof(cardBrand), cardBrand, "Invalid Card brand.");
+
+            if (transactionType.Equals(TransactionType.Credit, StringComparison.InvariantCultureIgnoreCase))
+                return fee.Credit;
+            else if (transactionType.Equals(TransactionType.Debit, StringComparison.InvariantCultureIgnoreCase))
+                return fee.Debit;
+            else
+                throw new IndexOutOfRangeException("Invalid Transaction Type.");
         }
 
         /// <summary>
@@ -116,9 +117,8 @@ namespace Payment_API.Model
     }
     public class Fee
     {
-        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Bandeira")]
-        public CardBrand CardBrand { get; set; }
+        public string CardBrand { get; set; }
 
         [JsonProperty("Credito")]
         public double Credit { get; set; }
@@ -137,7 +137,7 @@ namespace Payment_API.Model
         /// <param name="cardBrand">Card brand.</param>
         /// <param name="creditFee">Credit fee as decimal (eg. 12.54%).</param>
         /// <param name="debitFee">Debit fee as decimal (eg. 12.54%).</param>
-        public Fee(CardBrand cardBrand, double creditFee, double debitFee)
+        public Fee(string cardBrand, double creditFee, double debitFee)
         {
             this.CardBrand = cardBrand;
             this.Credit = creditFee;

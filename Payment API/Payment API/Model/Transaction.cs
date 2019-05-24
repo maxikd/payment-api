@@ -1,23 +1,23 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Payment_API.Enums;
 
 namespace Payment_API.Model
 {
     public class Transaction
     {
         [JsonProperty("Valor")]
+        [JsonRequired]
         public double Amount { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Tipo")]
-        public TransactionType? TransactionType { get; set; }
+        [JsonRequired]
+        public string TransactionType { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Bandeira")]
-        public CardBrand? CardBrand { get; set; }
+        [JsonRequired]
+        public string CardBrand { get; set; }
 
         [JsonProperty("Adquirente")]
+        [JsonRequired]
         public string Acquirer { get; set; }
     }
 
