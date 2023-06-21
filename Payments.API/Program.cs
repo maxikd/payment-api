@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using System.Threading.Tasks;
 
 namespace Payments.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(
+            string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+            var builder = WebApplication.CreateBuilder(args);
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            var app = builder.Build();
+
+            await app.RunAsync();
+        }
     }
 }
