@@ -1,22 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Payments.API.Model
 {
     public class Transaction
     {
-        [JsonProperty("Valor")]
+        [JsonPropertyName("Valor")]
         [JsonRequired]
         public double Amount { get; set; }
 
-        [JsonProperty("Tipo")]
+        [JsonPropertyName("Tipo")]
         [JsonRequired]
         public string TransactionType { get; set; }
 
-        [JsonProperty("Bandeira")]
+        [JsonPropertyName("Bandeira")]
         [JsonRequired]
         public string CardBrand { get; set; }
 
-        [JsonProperty("Adquirente")]
+        [JsonPropertyName("Adquirente")]
         [JsonRequired]
         public string Acquirer { get; set; }
 
@@ -44,7 +44,7 @@ namespace Payments.API.Model
 
     public class NetAmount
     {
-        [JsonProperty("ValorLiquido")]
+        [JsonPropertyName("ValorLiquido")]
         public double Net { get; set; }
 
         /// <summary>

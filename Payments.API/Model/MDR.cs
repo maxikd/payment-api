@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using Payments.API.Enums;
+﻿using Payments.API.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Payments.API.Model
 {
@@ -100,9 +100,9 @@ namespace Payments.API.Model
 
     public class MDR
     {
-        [JsonProperty("Adquirente")]
+        [JsonPropertyName("Adquirente")]
         public string Acquirer { get; private set; }
-        [JsonProperty("Taxas")]
+        [JsonPropertyName("Taxas")]
         public ICollection<Fee> Fees { get; private set; }
 
         /// <summary>
@@ -119,13 +119,13 @@ namespace Payments.API.Model
     }
     public class Fee
     {
-        [JsonProperty("Bandeira")]
+        [JsonPropertyName("Bandeira")]
         public string CardBrand { get; set; }
 
-        [JsonProperty("Credito")]
+        [JsonPropertyName("Credito")]
         public double Credit { get; set; }
 
-        [JsonProperty("Debito")]
+        [JsonPropertyName("Debito")]
         public double Debit { get; set; }
 
         /// <summary>

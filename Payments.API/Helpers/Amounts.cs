@@ -1,5 +1,4 @@
-﻿using Payments.API.Enums;
-using Payments.API.Model;
+﻿using Payments.API.Model;
 using System;
 
 namespace Payments.API.Helpers
