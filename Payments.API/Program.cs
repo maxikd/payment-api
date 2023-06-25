@@ -19,6 +19,8 @@ namespace Payments.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllers();
+
             builder.Services.AddSingleton<IMdrRepository, MdrRepository>();
 
             builder.Services.AddScoped<IMdrService, MdrService>();
