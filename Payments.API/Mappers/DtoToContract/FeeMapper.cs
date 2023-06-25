@@ -1,13 +1,13 @@
 using System;
 using Payments.API.Contracts;
-using Payments.API.Entities;
+using Payments.API.Dtos;
 
-namespace Payments.API.Mappers.Responses;
+namespace Payments.API.Mappers.DtoToContract;
 
-public class FeeMapper : IMapper<Fee, PaymentFee>
+public class FeeMapper : IMapper<FeeDto, PaymentFee>
 {
     public PaymentFee Map(
-        Fee input)
+        FeeDto input)
     {
         var fee = new PaymentFee
         {
@@ -20,12 +20,12 @@ public class FeeMapper : IMapper<Fee, PaymentFee>
     }
 
     private static Contracts.Enums.CardBrand MapCardBrand(
-        Entities.Enums.CardBrand brand)
+        Dtos.Enums.CardBrand brand)
     {
         return brand switch
         {
-            Entities.Enums.CardBrand.Mastercard => Contracts.Enums.CardBrand.Master,
-            Entities.Enums.CardBrand.Visa => Contracts.Enums.CardBrand.Visa,
+            Dtos.Enums.CardBrand.Mastercard => Contracts.Enums.CardBrand.Master,
+            Dtos.Enums.CardBrand.Visa => Contracts.Enums.CardBrand.Visa,
             _ => throw new ArgumentOutOfRangeException(nameof(brand), brand, "Invalid card brand")
         };
     }

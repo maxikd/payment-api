@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
 using Payments.API.Contracts;
-using Payments.API.Entities;
+using Payments.API.Dtos;
 
-namespace Payments.API.Mappers.Responses;
-public class MdrMapper : IMapper<Mdr, PaymentMdr>
+namespace Payments.API.Mappers.DtoToContract;
+
+public class MdrMapper : IMapper<MdrDto, PaymentMdr>
 {
     public MdrMapper(
-        IMapper<IEnumerable<Fee>, IEnumerable<PaymentFee>> feeMapper)
+        IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>> feeMapper)
     {
         FeeMapper = feeMapper ?? throw new ArgumentNullException(nameof(feeMapper));
     }
 
-    public IMapper<IEnumerable<Fee>, IEnumerable<PaymentFee>> FeeMapper { get; }
+    public IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>> FeeMapper { get; }
 
     public PaymentMdr Map(
-        Mdr input)
+        MdrDto input)
     {
         var mdr = new PaymentMdr
         {

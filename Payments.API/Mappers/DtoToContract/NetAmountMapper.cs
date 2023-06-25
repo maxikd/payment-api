@@ -1,6 +1,6 @@
 using Payments.API.Contracts;
 
-namespace Payments.API.Mappers.Responses;
+namespace Payments.API.Mappers.DtoToContract;
 
 public class NetAmountMapper : IMapper<double, PaymentNetAmount>
 {
