@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Payments.API.Contracts;
-using Payments.API.Entities;
+using Payments.API.Dtos;
 using Payments.API.Mappers;
 using Payments.API.Services.Abstractions;
 
@@ -14,14 +14,14 @@ public class MdrController : ControllerBase
 {
     public MdrController(
         IMdrService mdrService,
-        IMapper<Mdr, PaymentMdr> mdrMapper)
+        IMapper<MdrDto, PaymentMdr> mdrMapper)
     {
         MdrService = mdrService ?? throw new ArgumentNullException(nameof(mdrService));
         MdrMapper = mdrMapper ?? throw new ArgumentNullException(nameof(mdrMapper));
     }
 
     public IMdrService MdrService { get; }
-    public IMapper<Mdr, PaymentMdr> MdrMapper { get; }
+    public IMapper<MdrDto, PaymentMdr> MdrMapper { get; }
 
     [HttpGet]
     [Route("mdr")]

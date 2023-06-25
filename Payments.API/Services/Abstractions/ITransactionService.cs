@@ -1,4 +1,4 @@
-using Payments.API.Entities.Enums;
+using Payments.API.Dtos.Enums;
 
 namespace Payments.API.Services.Abstractions;
 

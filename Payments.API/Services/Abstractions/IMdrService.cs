@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Payments.API.Entities;
+using Payments.API.Dtos;
 
 namespace Payments.API.Services.Abstractions;
 
 public interface IMdrService
 {
-    IEnumerable<Mdr> GetAll();
+    IEnumerable<MdrDto> GetAll();
 }

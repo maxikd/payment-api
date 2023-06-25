@@ -12,8 +12,8 @@ public class TransactionController : ControllerBase
 {
     public TransactionController(
         ITransactionService transactionService,
-        IMapper<Contracts.Enums.CardBrand, Entities.Enums.CardBrand> cardBrandMapper,
-        IMapper<Contracts.Enums.TransactionType, Entities.Enums.TransactionType> transactionTypeMapper,
+        IMapper<Contracts.Enums.CardBrand, Dtos.Enums.CardBrand> cardBrandMapper,
+        IMapper<Contracts.Enums.TransactionType, Dtos.Enums.TransactionType> transactionTypeMapper,
         IMapper<double, PaymentNetAmount> netAmountMapper)
     {
         TransactionService = transactionService ?? throw new ArgumentNullException(nameof(transactionService));
@@ -23,8 +23,8 @@ public class TransactionController : ControllerBase
     }
 
     public ITransactionService TransactionService { get; }
-    public IMapper<Contracts.Enums.CardBrand, Entities.Enums.CardBrand> CardBrandMapper { get; }
-    public IMapper<Contracts.Enums.TransactionType, Entities.Enums.TransactionType> TransactionTypeMapper { get; }
+    public IMapper<Contracts.Enums.CardBrand, Dtos.Enums.CardBrand> CardBrandMapper { get; }
+    public IMapper<Contracts.Enums.TransactionType, Dtos.Enums.TransactionType> TransactionTypeMapper { get; }
     public IMapper<double, PaymentNetAmount> NetAmountMapper { get; }
 
     [HttpPost]
