@@ -2,6 +2,6 @@ namespace Payments.API.Entities.Enums;
 
 public enum TransactionType
 {
-    Credit,
-    Debit
+    Credit = 1,
+    Debit = 2
 }

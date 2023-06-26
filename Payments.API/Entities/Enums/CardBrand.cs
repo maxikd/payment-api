@@ -2,6 +2,6 @@ namespace Payments.API.Entities.Enums;
 
 public enum CardBrand
 {
-    Visa,
-    Mastercard
+    Visa = 1,
+    Mastercard = 2
 }
