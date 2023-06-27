@@ -8,6 +8,7 @@ using Payments.API.Repositories;
 using Payments.API.Repositories.Abstractions;
 using Payments.API.Services;
 using Payments.API.Services.Abstractions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Payments.API
@@ -32,6 +33,7 @@ namespace Payments.API
             builder.Services.AddScoped<IMapper<Dtos.Enums.TransactionType, Entities.Enums.TransactionType>, Mappers.DtoToEntity.TransactionTypeMapper>();
             builder.Services.AddScoped<IMapper<Fee, FeeDto>, Mappers.EntityToDto.FeeMapper>();
             builder.Services.AddScoped<IMapper<FeeDto, PaymentFee>, Mappers.DtoToContract.FeeMapper>();
+            builder.Services.AddScoped<IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>>, Mappers.DtoToContract.FeesMapper>();
             builder.Services.AddScoped<IMapper<Mdr, MdrDto>, Mappers.EntityToDto.MdrMapper>();
             builder.Services.AddScoped<IMapper<MdrDto, PaymentMdr>, Mappers.DtoToContract.MdrMapper>();
             builder.Services.AddScoped<IMapper<double, PaymentNetAmount>, Mappers.DtoToContract.NetAmountMapper>();

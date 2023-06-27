@@ -8,12 +8,12 @@ namespace Payments.API.Mappers.DtoToContract;
 public class MdrMapper : IMapper<MdrDto, PaymentMdr>
 {
     public MdrMapper(
-        IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>> feeMapper)
+        IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>> feesMapper)
     {
-        FeeMapper = feeMapper ?? throw new ArgumentNullException(nameof(feeMapper));
+        FeesMapper = feesMapper ?? throw new ArgumentNullException(nameof(feesMapper));
     }
 
-    public IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>> FeeMapper { get; }
+    public IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>> FeesMapper { get; }
 
     public PaymentMdr Map(
         MdrDto input)
@@ -21,7 +21,7 @@ public class MdrMapper : IMapper<MdrDto, PaymentMdr>
         var mdr = new PaymentMdr
         {
             Acquirer = input.Acquirer,
-            Fees = FeeMapper.Map(input.Fees)
+            Fees = FeesMapper.Map(input.Fees)
         };
 
         return mdr;
