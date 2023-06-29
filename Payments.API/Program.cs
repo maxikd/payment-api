@@ -4,6 +4,7 @@ using Payments.API.Contracts;
 using Payments.API.Dtos;
 using Payments.API.Entities;
 using Payments.API.Mappers;
+using Payments.API.Mappers.ContractToDto;
 using Payments.API.Repositories;
 using Payments.API.Repositories.Abstractions;
 using Payments.API.Services;
@@ -36,6 +37,7 @@ namespace Payments.API
             builder.Services.AddScoped<IMapper<IEnumerable<FeeDto>, IEnumerable<PaymentFee>>, Mappers.DtoToContract.FeesMapper>();
             builder.Services.AddScoped<IMapper<Mdr, MdrDto>, Mappers.EntityToDto.MdrMapper>();
             builder.Services.AddScoped<IMapper<MdrDto, PaymentMdr>, Mappers.DtoToContract.MdrMapper>();
+            builder.Services.AddScoped<IMapper<PaymentTransaction, TransactionDto>, TransactionMapper>();
             builder.Services.AddScoped<IMapper<double, PaymentNetAmount>, Mappers.DtoToContract.NetAmountMapper>();
 
             var app = builder.Build();

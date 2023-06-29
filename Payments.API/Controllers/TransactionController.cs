@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Payments.API.Contracts;
+using Payments.API.Dtos;
 using Payments.API.Mappers;
 using Payments.API.Services.Abstractions;
 using System;
@@ -12,19 +13,16 @@ public class TransactionController : ControllerBase
 {
     public TransactionController(
         ITransactionService transactionService,
-        IMapper<Contracts.Enums.CardBrand, Dtos.Enums.CardBrand> cardBrandMapper,
-        IMapper<Contracts.Enums.TransactionType, Dtos.Enums.TransactionType> transactionTypeMapper,
+        IMapper<PaymentTransaction, TransactionDto> transactionMapper,
         IMapper<double, PaymentNetAmount> netAmountMapper)
     {
         TransactionService = transactionService ?? throw new ArgumentNullException(nameof(transactionService));
-        CardBrandMapper = cardBrandMapper ?? throw new ArgumentNullException(nameof(cardBrandMapper));
-        TransactionTypeMapper = transactionTypeMapper ?? throw new ArgumentNullException(nameof(transactionTypeMapper));
+        TransactionMapper = transactionMapper ?? throw new ArgumentNullException(nameof(transactionMapper));
         NetAmountMapper = netAmountMapper ?? throw new ArgumentNullException(nameof(netAmountMapper));
     }
 
     public ITransactionService TransactionService { get; }
-    public IMapper<Contracts.Enums.CardBrand, Dtos.Enums.CardBrand> CardBrandMapper { get; }
-    public IMapper<Contracts.Enums.TransactionType, Dtos.Enums.TransactionType> TransactionTypeMapper { get; }
+    public IMapper<PaymentTransaction, TransactionDto> TransactionMapper { get; }
     public IMapper<double, PaymentNetAmount> NetAmountMapper { get; }
 
     [HttpPost]
@@ -34,14 +32,9 @@ public class TransactionController : ControllerBase
     {
         try
         {
-            var cardBrand = CardBrandMapper.Map(paymentTransaction.CardBrand);
-            var transactionType = TransactionTypeMapper.Map(paymentTransaction.Type);
+            var transaction = TransactionMapper.Map(paymentTransaction);
 
-            var net = TransactionService.Execute(
-                paymentTransaction.Amount,
-                paymentTransaction.Acquirer,
-                cardBrand,
-                transactionType);
+            var net = TransactionService.Execute(transaction);
 
             var netAmount = NetAmountMapper.Map(net);
 

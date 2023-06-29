@@ -1,4 +1,5 @@
 using System;
+using Payments.API.Dtos;
 using Payments.API.Mappers;
 using Payments.API.Repositories.Abstractions;
 using Payments.API.Services.Abstractions;
@@ -22,17 +23,14 @@ public class TransactionService : ITransactionService
     public IMapper<Dtos.Enums.TransactionType, Entities.Enums.TransactionType> TransactionTypeMapper { get; }
 
     public double Execute(
-        double amount,
-        string acquirer,
-        Dtos.Enums.CardBrand cardBrand,
-        Dtos.Enums.TransactionType transactionType)
+        TransactionDto transaction)
     {
-        var brand = CardBrandMapper.Map(cardBrand);
-        var type = TransactionTypeMapper.Map(transactionType);
+        var brand = CardBrandMapper.Map(transaction.CardBrand);
+        var type = TransactionTypeMapper.Map(transaction.TransactionType);
 
         var net = ComputeNetAmount(
-            amount,
-            acquirer,
+            transaction.Amount,
+            transaction.Acquirer,
             brand,
             type);
 
