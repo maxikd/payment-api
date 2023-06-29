@@ -28,9 +28,4 @@
     <ProjectReference Include="../Payments.API/Payments.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappers/DtoToEntity/" />
-    <Folder Include="Mappers/EntityToDto/" />
-  </ItemGroup>
-
 </Project>

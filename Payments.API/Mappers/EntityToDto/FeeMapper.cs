@@ -6,10 +6,18 @@ namespace Payments.API.Mappers.EntityToDto;
 
 public class FeeMapper : IMapper<Fee, FeeDto>
 {
+    public FeeMapper(
+        IMapper<Entities.Enums.CardBrand, Dtos.Enums.CardBrand> cardBrandMapper)
+    {
+        CardBrandMapper = cardBrandMapper ?? throw new ArgumentNullException(nameof(cardBrandMapper));
+    }
+
+    public IMapper<Entities.Enums.CardBrand, Dtos.Enums.CardBrand> CardBrandMapper { get; }
+
     public FeeDto Map(
         Fee input)
     {
-        var cardBrand = MapCardBrand(input.CardBrand);
+        var cardBrand = CardBrandMapper.Map(input.CardBrand);
 
         var fee = new FeeDto(
             cardBrand,
@@ -17,16 +25,5 @@ public class FeeMapper : IMapper<Fee, FeeDto>
             input.DebitFee);
 
         return fee;
-    }
-
-    private static Dtos.Enums.CardBrand MapCardBrand(
-        Entities.Enums.CardBrand brand)
-    {
-        return brand switch
-        {
-            Entities.Enums.CardBrand.Mastercard => Dtos.Enums.CardBrand.Mastercard,
-            Entities.Enums.CardBrand.Visa => Dtos.Enums.CardBrand.Visa,
-            _ => throw new ArgumentOutOfRangeException(nameof(brand), brand, "Invalid card brand")
-        };
     }
 }
