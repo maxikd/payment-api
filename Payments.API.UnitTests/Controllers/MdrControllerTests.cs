@@ -35,6 +35,7 @@ public class MdrControllerTests
             .Returns(contract);
 
         var result = sut.GetAll();
+        result.Should().BeOfType<OkObjectResult>();
 
         var okResult = result.As<OkObjectResult>();
 
