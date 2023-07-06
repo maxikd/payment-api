@@ -31,13 +31,13 @@ public class MdrRepository : IMdrRepository
 
         var fee = mdr.Fees.SingleOrDefault(fee => fee.CardBrand == brand);
         if (fee is null)
-            throw new ArgumentOutOfRangeException(nameof(brand), brand, "Invalid Card brand.");
+            throw new ArgumentOutOfRangeException(nameof(brand), brand, "Invalid Card Brand.");
 
         return type switch
         {
             TransactionType.Credit => fee.CreditFee,
             TransactionType.Debit => fee.DebitFee,
-            _ => throw new IndexOutOfRangeException("Invalid Transaction Type.")
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Invalid Transaction Type.")
         };
     }
 
